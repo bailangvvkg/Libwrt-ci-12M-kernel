@@ -1,6 +1,7 @@
 name: IPQ60XX-6.12-WIFI
 
 on:
+  #自动编译：每天早上4点
   workflow_dispatch:
   schedule:
     - cron: 0 19 * * *
@@ -153,7 +154,8 @@ jobs:
       with:
         name: R${{ env.DATE }} for ${{ env.FIRMWARE_TAG }}
         allowUpdates: true
-        tag: ${{ env.FIRMWARE_TAG }}
+        # tag: ${{ env.FIRMWARE_TAG }}
+        tag: ${{ ${{env.WRT_DATE}}_env.FIRMWARE_TAG }}
         token: ${{ secrets.GITHUB_TOKEN }}
         artifacts: ${{ env.FIRMWARE_PATH }}/*
         body: |
