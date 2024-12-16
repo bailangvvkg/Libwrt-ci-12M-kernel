@@ -150,6 +150,8 @@ echo "CONFIG_PACKAGE_curl=y" >> ./.config
 # echo "CONFIG_DEFAULT_tcp_bbr=y" >> ./.config
 # 磁盘管理
 echo "CONFIG_PACKAGE_luci-app-diskman=y" >> ./.config
+# 大鹅(daed)
+echo "CONFIG_PACKAGE_luci-app-daed=y" >> ./.config
 
 git clone https://github.com/QiuSimons/luci-app-daed package/dae
 
