@@ -122,5 +122,36 @@ find package/luci-theme-*/* -type f -name '*luci-theme-*' -print -exec sed -i '/
 # sed -i 's/services/vpn/g' feeds/luci/applications/luci-app-v2ray-server/luasrc/model/cbi/v2ray_server/*.lua
 # sed -i 's/services/vpn/g' feeds/luci/applications/luci-app-v2ray-server/luasrc/view/v2ray_server/*.htm
 
+#修改jdc ax1800 pro 的内核大小为12M
+sed -i "/^define Device\/jdcloud_ax1800-pro/,/^endef/ { /KERNEL_SIZE := 6144k/s//KERNEL_SIZE := 12288k/ }" target/linux/qualcommax/image/ipq60xx.mk
+
+# 想要剔除的
+# echo "CONFIG_PACKAGE_htop=n" >> ./.config
+# echo "CONFIG_PACKAGE_iperf3=n" >> ./.config
+echo "CONFIG_PACKAGE_luci-app-wolplus=n" >> ./.config
+echo "CONFIG_PACKAGE_luci-app-tailscale=n" >> ./.config
+# echo "CONFIG_PACKAGE_luci-app-advancedplus=n" >> ./.config
+echo "CONFIG_PACKAGE_luci-theme-kucat=n" >> ./.config
+
+# 可以让FinalShell查看文件列表并且ssh连上不会自动断开
+echo "CONFIG_PACKAGE_openssh-sftp-server=y" >> ./.config
+# 解析、查询、操作和格式化 JSON 数据
+echo "CONFIG_PACKAGE_jq=y" >> ./.config
+# 简单明了的系统资源占用查看工具
+echo "CONFIG_PACKAGE_btop=y" >> ./.config
+# 多网盘存储
+echo "CONFIG_PACKAGE_luci-app-alist=y" >> ./.config
+# 强大的工具(需要添加源或git clone)
+# echo "CONFIG_PACKAGE_luci-app-lucky=y" >> ./.config
+# 网络通信工具
+echo "CONFIG_PACKAGE_curl=y" >> ./.config
+# BBR 拥塞控制算法(终端侧)
+# echo "CONFIG_PACKAGE_kmod-tcp-bbr=y" >> ./.config
+# echo "CONFIG_DEFAULT_tcp_bbr=y" >> ./.config
+# 磁盘管理
+echo "CONFIG_PACKAGE_luci-app-diskman=y" >> ./.config
+# 大鹅(daed)
+echo "CONFIG_PACKAGE_luci-app-daed=y" >> ./.config
+
 ./scripts/feeds update -a
 ./scripts/feeds install -a
